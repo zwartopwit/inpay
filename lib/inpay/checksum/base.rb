@@ -4,6 +4,8 @@ require 'digest/md5'
 
 module Inpay
   module Checksum
+    
+    # checksum base class should only be used as a subclass
     class Base
       
       def initialize params

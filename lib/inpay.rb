@@ -13,6 +13,7 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 module Inpay
   
+  # shortcut for checksum calculation
   def self.checksum action, params
     unless %w(create_invoice).include?(action.to_s)
       raise ArgumentError.new("'#{ action }' is not a valid action")
