@@ -20,8 +20,11 @@ Jeweler::Tasks.new do |gem|
   gem.email = "wout@boysabroad.com"
   gem.authors = ["Wout Fierens"]
   
-  gem.add_dependency 'active_support'
-  gem.add_development_dependency('rspec')
+  # add main dependencies
+  gem.add_dependency             'active_support', '>= 3.0.0'
+  
+  # add development dependencies
+  gem.add_development_dependency 'rspec', '>= 2.0.0'
 end
 Jeweler::RubygemsDotOrgTasks.new
 

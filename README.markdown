@@ -1,10 +1,10 @@
-# inpay
+# inpay gem
 
 ## What is it?
-An API wrapper for the inpay.com online bank payment system.
+A Ruby gem wrapping the inpay.com API for online bank payments.
 
 ## Who should use it?
-Any Ruby (on Rails) developer who wants/needs to work with inpay.
+Any Ruby on Rails developer who wants/needs to work with inpay.
 
 ## Usage
 
