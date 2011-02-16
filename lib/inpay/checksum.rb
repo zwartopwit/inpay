@@ -18,14 +18,7 @@ class Inpay::Checksum
   # build a param_string from given parameters
   def param_string
     PARAMS.collect do |p|
-      if p == 'amount'
-        value = sprintf('%.2f', @params[:amount].to_f)
-      else
-        value = @params[:"#{ p }"]
-      end
-      
-      "#{ p }=#{ CGI.escape(value.to_s) }"
-      
+      "#{ p }=#{ CGI.escape(@params[:"#{ p }"].to_s) }"
     end.join('&')
   end
   

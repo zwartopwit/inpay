@@ -1,7 +1,6 @@
 # -*- encoding : utf-8 -*-
 require 'inpay'
 require 'inpay/checksum'
-require 'inpay/core_extensions'
 require 'inpay/notification'
 require 'inpay/transaction'
 
