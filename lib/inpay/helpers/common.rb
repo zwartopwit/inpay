@@ -2,8 +2,13 @@ module Inpay
   module Helpers
     module Common
       
-      def inpay_invoice_fields amount, options
-        misses = (options.keys - valid_setup_options)
+      # nice option for form url
+      def inpay_flow_url
+        Inpay::Config.flow_url
+      end
+      
+      def inpay_setup amount, options
+        misses = (options.keys - valid_invoice_options)
         raise ArgumentError, "Unknown options #{ misses.inspect }" unless misses.empty?
         
         params = {
@@ -17,6 +22,11 @@ module Inpay
         # accept both strings and Money objects as amount
         amount = amount.cents.to_f / 100.0 if amount.respond_to?(:cents)
         params[:amount] = sprintf('%.2f', amount)
+        
+        # add checksum
+        params[:checksum] = Inpay.checksum(:create_invoice, params)
+        
+        params.delete(:secret_key)
         
         # build form
         inpay_fields(params)
@@ -41,6 +51,7 @@ module Inpay
             :order_text,
             :flow_layout,
             :buyer_email,
+            :secret_key,
             :checksum,
             
             # nonmandatory

@@ -1,9 +1,14 @@
 # -*- encoding : utf-8 -*-
 require 'rubygems'
 require 'net/http'
+
 require 'active_support/core_ext/hash/conversions'
 require 'active_support/core_ext/string/inflections'
+
+require 'inpay/config'
+require 'inpay/rails'
 require 'inpay/core_extensions'
+require 'inpay/postback'
 require 'inpay/checksum'
 require 'inpay/checksum/create_invoice'
 

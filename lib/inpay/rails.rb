@@ -1,5 +1,3 @@
-require 'active_support'
-require File.join(File.dirname(__FILE__), 'helpers', '/rails')
+require File.join(File.dirname(__FILE__), 'helpers', 'common')
 
 ActionView::Base.send(:include, Inpay::Helpers::Common)
-ActionView::Base.send(:include, Inpay::Helpers::Rails)

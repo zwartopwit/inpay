@@ -4,7 +4,7 @@ module Inpay
   class InvalidIPError < StandardError; end
   class ForgedRequestError < StandardError; end
   
-  class Invoice
+  class Postback
     attr_accessor :raw, :params
     
     def initialize request

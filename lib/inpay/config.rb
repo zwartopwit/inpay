@@ -1,15 +1,15 @@
 module Inpay
   module Config
     
-    # post url
-    def self.post_urls
-      Thread.current[:post_urls] ||= {
+    # flow urls
+    def self.flow_urls
+      Thread.current[:flow_urls] ||= {
         :test       => "https://test-secure.inpay.com/",
         :production => "https://secure.inpay.com/"
       }
     end
-    def self.post_url
-      post_urls[mode]
+    def self.flow_url
+      flow_urls[mode]
     end
     
     # current operation mode
