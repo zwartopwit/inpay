@@ -20,7 +20,7 @@ module Inpay
   
   # shortcut for checksum calculation
   def self.checksum action, params
-    unless %w(create_invoice).include?(action.to_s)
+    unless %w(create_invoice postback).include?(action.to_s)
       raise ArgumentError.new("'#{ action }' is not a valid action")
     end
     

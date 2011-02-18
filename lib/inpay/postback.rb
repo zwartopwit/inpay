@@ -7,9 +7,10 @@ module Inpay
   class Postback
     attr_accessor :raw, :params, :error
     
-    def initialize request
+    def initialize request, secret_key
       raise NoDataError if request.nil? || request.raw_post.to_s.blank?
       
+      @secret_key = secret_key
       @remote_ip  = request.remote_ip
       @params     = {}
       @raw        = ''
@@ -73,6 +74,9 @@ module Inpay
         params.each do |k, v|
           self.params[k] = v.last if v.is_a?(Array)
         end
+        
+        # add secret key
+        params[:secret_key] = @secret_key
       end
   end
   
