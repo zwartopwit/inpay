@@ -5,7 +5,7 @@ module Inpay
   class ForgedRequestError < StandardError; end
   
   class Postback
-    attr_accessor :raw, :params
+    attr_accessor :raw, :params, :error
     
     def initialize request
       raise NoDataError if request.nil? || request.raw_post.to_s.blank?
@@ -52,10 +52,10 @@ module Inpay
     
     # acknowledge postback data
     def genuine?
-      raise InvalidIPError      unless Inpay::Config.server_ips.include?(@remote_ip)
-      raise ForgedRequestError  unless Inpay.checksum(:create_invoice, params) === params[:checksum]
+      self.error = InvalidIPError     unless Inpay::Config.server_ips.include?(@remote_ip)
+      self.error = ForgedRequestError unless Inpay.checksum(:postback, params) == params[:checksum]
       
-      true
+      error.nil?
     end
     
     private

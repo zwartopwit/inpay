@@ -39,6 +39,8 @@ module Inpay
       case action.to_sym
       when :create_invoice
         %w(merchant_id order_id amount currency order_text flow_layout secret_key)
+      when :postback
+        %w(order_id invoice_reference invoice_amount invoice_currency invoice_created_at invoice_status secret_key)
       end
     end
     

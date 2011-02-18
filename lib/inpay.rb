@@ -11,6 +11,7 @@ require 'inpay/core_extensions'
 require 'inpay/postback'
 require 'inpay/checksum'
 require 'inpay/checksum/create_invoice'
+require 'inpay/checksum/postback'
 
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
