@@ -5,7 +5,6 @@ require 'active_support/core_ext/hash/conversions'
 require 'active_support/core_ext/string/inflections'
 require 'inpay/core_extensions'
 require 'inpay/checksum'
-require 'inpay/checksum/base'
 require 'inpay/checksum/create_invoice'
 
 $:.unshift(File.dirname(__FILE__)) unless

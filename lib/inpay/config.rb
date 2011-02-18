@@ -26,5 +26,21 @@ module Inpay
       Thread.current[:mode] ||= :test
     end
     
+    # inpay server ips
+    def self.server_ips= ips
+      Thread.current[:server_ips] = [ips].flatten
+    end
+    def self.server_ips
+      Thread.current[:server_ips] ||= []
+    end
+    
+    # fields
+    def self.keys_for action
+      case action.to_sym
+      when :create_invoice
+        %w(merchant_id order_id amount currency order_text flow_layout secret_key)
+      end
+    end
+    
   end
 end

@@ -1,18 +1,20 @@
 # -*- encoding : utf-8 -*-
 module Inpay
   class NoDataError < StandardError; end
+  class InvalidIPError < StandardError; end
+  class ForgedRequestError < StandardError; end
   
-  class Notification
-    attr_accessor :params
-    attr_accessor :raw
+  class Invoice
+    attr_accessor :raw, :params
+    
+    def initialize request
+      raise NoDataError if request.nil? || request.raw_post.to_s.blank?
+      
+      @remote_ip  = request.remote_ip
+      @params     = {}
+      @raw        = ''
 
-    def initialize(post)
-      raise NoDataError if post.to_s.blank?
-
-      @params  = {}
-      @raw     = ''
-
-      parse(post)
+      parse(request.raw_post)
     end
 
     # Transaction statuses
@@ -48,25 +50,27 @@ module Inpay
       params[method.to_s] || super
     end
     
-    # check if the request is genuine
+    # acknowledge postback data
     def genuine?
+      raise InvalidIPError      unless Inpay::Config.server_ips.include?(@remote_ip)
+      raise ForgedRequestError  unless Inpay.checksum(:create_invoice, params) === params[:checksum]
       
+      true
     end
-
-
+    
     private
 
       def status
-        @status ||= (params['invoice_status'] ? params['invoice_status'].to_sym : nil)
+        @status ||= (params[:invoice_status] ? params[:invoice_status].to_sym : nil)
       end
 
       # Take the posted data and move the relevant data into a hash
-      def parse(post)
+      def parse post
         @raw = post
-        self.params = Rack::Utils.parse_query(post)
+        self.params = Rack::Utils.parse_query(post).symbolize_keys
 
         # Rack allows duplicate keys in queries, we need to use only the last value here
-        self.params.each do |k,v|
+        params.each do |k, v|
           self.params[k] = v.last if v.is_a?(Array)
         end
       end

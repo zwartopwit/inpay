@@ -5,7 +5,7 @@ module Inpay
       private
         
         def keys
-          %w(merchant_id order_id amount currency order_text flow_layout secret_key)
+          Inpay::Config.keys_for(:create_invoice)
         end
         
     end
