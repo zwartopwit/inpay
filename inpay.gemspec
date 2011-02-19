@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.markdown",
     "Rakefile",
     "VERSION",
+    "inpay.gemspec",
     "lib/inpay.rb",
     "lib/inpay/checksum.rb",
     "lib/inpay/checksum/create_invoice.rb",
