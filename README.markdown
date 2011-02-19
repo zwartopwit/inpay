@@ -18,14 +18,18 @@ By default the environment is set to test. Add the following line to the environ
 
     Inpay::Config.mode = :production
 
-You will also need to define the IP (or IP's) you will accept postbacks form. Add a private method in your application controller, something like this:
-
+You will also need to define the IP (or IPs) you will accept postbacks form. Add a private method in your application controller, something like this:
+    
+    private
+    
     def set_inpay_ips
       Inpay::Config.server_ips = 'xxx.xxx.xxx.xxx'
     end
 
 You can also use an array:
-
+    
+    private
+    
     def set_inpay_ips
       Inpay::Config.server_ips = ['xxx.xxx.xxx.xxx', 'xxx.xxx.xxx.xxx', 'xxx.xxx.xxx.xxx']
     end
@@ -34,7 +38,7 @@ In the controller that will process the postback add a before filter:
 
     before_filter :set_inpay_ips
 
-### In your view
+### The form in your view
 
 Create a form tag and use the inpay_setup method to generate the necessary hidden fields:
     
@@ -64,6 +68,61 @@ These are nonmandatory:
 - :buyer_name
 - :buyer_address
 
+### Handling a postback in your controller
+
+An Inpay postback controller might look something like this:
+
+    class InpaysController < ApplicationController
+      skip_before_filter :verify_authenticity_token
+    
+      def postback
+        begin
+          @postback = Inpay::Postback.new(request, _your_inpay_secret_key_ )
+          
+          if @postback.genuine?
+            if @postback.approved?
+              ... yay ...
+            else
+              ... meh ...
+            end
+          end
+        rescue Exception => e
+          ... handle the error ...
+        end
+        
+        render :nothing => true
+      end
+    end
+
+Important: make sure no errors are thrown when something goes wrong. Logically Inpay will see this as a failure and keep on sending postbacks. Hence the begin/rescue block.
+
+The Inpay::Postback instance has a lot of methods for the result of the transactions:
+
+- genuine? _(verifies the checksum and IP of the server that performed the postback)_
+
+- pending?
+- sum_too_low?
+- approved?
+- cancelled?
+- refunded?
+- refund_pending?
+- error? _(when something went wrong with connection)_
+
+The inpay server will post back the following params:
+
+- :invoice_currency
+- :invoice_reference
+- :checksum
+- :order_id
+- :invoice_amount
+- :invoice_created_at _(e.g. 2011-02-19 10:41:55)_
+- :invoice_status
+
+You might need some of those params to fetch the invoice, status and so on.
+
+## Important
+
+This gem is written for Rails 3. Rails 2 might work but it's not tested.
 
 ## Contributing to inpay
  
