@@ -47,18 +47,18 @@ The amount can be either a float or a Money object. Options should be passed as 
 These are all required options:
 
 - :order_id 
-- :merchant_id      __(your merchant id at inpay)__
-- :currency         __(defaults to :EUR)__
-- :order_text       __(a brief description)__
+- :merchant_id      _(your merchant id at inpay)_
+- :currency         _(defaults to :EUR)_
+- :order_text       _(a brief description)_
 - :buyer_email
-- :secret_key       __(your sectret key from inpay)__
-- :flow_layout      __(defaults to :multi_page)__
+- :secret_key       _(your sectret key from inpay)_
+- :flow_layout      _(defaults to :multi_page)_
 
 These are nonmandatory:
 
-- :return_url       __(defaults to the return url set in the inpay admin)__
-- :pending_url      __(defaults to the return url set in the inpay admin)__
-- :cancel_url       __(defaults to the return url set in the inpay admin)__
+- :return_url       _(defaults to the return url set in the inpay admin)_
+- :pending_url      _(defaults to the return url set in the inpay admin)_
+- :cancel_url       _(defaults to the return url set in the inpay admin)_
 - :country
 - :invoice_comment
 - :buyer_name
