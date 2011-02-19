@@ -99,7 +99,6 @@ Important: make sure no errors are thrown when something goes wrong. Logically I
 The Inpay::Postback instance has a lot of methods for the result of the transactions:
 
 - genuine? _(verifies the checksum and IP of the server that performed the postback)_
-
 - pending?
 - sum_too_low?
 - approved?
@@ -136,6 +135,6 @@ This gem is written for Rails 3. Rails 2 might work but it's not tested.
 
 ## Copyright
 
-Copyright (c) 2011 wout fierens. See LICENSE.txt for
+Copyright (c) 2011 Wout Fierens. See LICENSE.txt for
 further details.
 
