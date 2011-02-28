@@ -9,6 +9,8 @@ module Inpay
       
       def inpay_setup amount, options
         misses = (options.keys - valid_invoice_options)
+        misses.delete_if { |option| option.to_s.match(/^extra_/) }
+        
         raise ArgumentError, "Unknown options #{ misses.inspect }" unless misses.empty?
         
         params = {
@@ -58,10 +60,12 @@ module Inpay
             :return_url,
             :pending_url,
             :cancel_url,
+            :notify_url,
             :country,
             :invoice_comment,
             :buyer_name,
-            :buyer_address
+            :buyer_address,
+            :buyer_information
           ]
         end
       

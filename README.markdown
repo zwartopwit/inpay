@@ -1,7 +1,7 @@
 # inpay gem
 
 ## What is it?
-A Ruby gem wrapping the inpay.com API for online bank payments.
+A Ruby gem wrapping the inpay.com merchant API.
 
 ## Who should use it?
 Any Ruby on Rails developer who wants/needs to work with inpay.
@@ -51,22 +51,25 @@ The amount can be either a float or a Money object. Options should be passed as 
 These are all required options:
 
 - :order_id 
-- :merchant_id      _(your merchant id at inpay)_
-- :currency         _(defaults to :EUR)_
-- :order_text       _(a brief description)_
+- :merchant_id        _(your merchant id at inpay)_
+- :currency           _(defaults to :EUR)_
+- :order_text         _(a brief description)_
 - :buyer_email
-- :secret_key       _(your sectret key from inpay)_
-- :flow_layout      _(defaults to :multi_page)_
+- :secret_key         _(your sectret key from inpay)_
+- :flow_layout        _(defaults to :multi_page)_
 
 These are nonmandatory:
 
-- :return_url       _(defaults to the return url set in the inpay admin)_
-- :pending_url      _(defaults to the return url set in the inpay admin)_
-- :cancel_url       _(defaults to the return url set in the inpay admin)_
+- :return_url         _(defaults to the return url set in the inpay admin)_
+- :pending_url        _(defaults to the return url set in the inpay admin)_
+- :cancel_url         _(defaults to the return url set in the inpay admin)_
+- :notify_url         _(defaults to the postback url set in the inpay admin)_
 - :country
-- :invoice_comment
+- :invoice_comment    _(will be attached to the created invoice)_
 - :buyer_name
-- :buyer_address
+- :buyer_address      _(street, zip code, city, state, country)_
+- :buyer_information  _(free text field where you can put information that could be relevant to the customer)_
+- :extra_[name]       _(those parameters will be added to the return url without the "extra_" prefix)_
 
 ### Handling a postback in your controller
 
