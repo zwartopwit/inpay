@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{inpay}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Wout Fierens"]
-  s.date = %q{2011-02-19}
+  s.date = %q{2011-02-28}
   s.description = %q{An API wrapper for the inpay.com payment system}
   s.email = %q{wout@boysabroad.com}
   s.extra_rdoc_files = [
