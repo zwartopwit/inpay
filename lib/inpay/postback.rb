@@ -59,12 +59,12 @@ module Inpay
       error.nil?
     end
     
+    def status
+      @status ||= (params[:invoice_status] ? params[:invoice_status].to_sym : nil)
+    end
+    
     private
-
-      def status
-        @status ||= (params[:invoice_status] ? params[:invoice_status].to_sym : nil)
-      end
-
+      
       # Take the posted data and move the relevant data into a hash
       def parse post
         @raw = post

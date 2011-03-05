@@ -69,7 +69,7 @@ These are nonmandatory:
 - :buyer_name
 - :buyer_address      _(street, zip code, city, state, country)_
 - :buyer_information  _(free text field where you can put information that could be relevant to the customer)_
-- :extra_your_param   _(those parameters will be added to the return url without the "extra_" prefix)_
+- :extra_your_param   _(those parameters will be added to the return url without the "extra" prefix)_
 
 ### Handling a postback in your controller
 
